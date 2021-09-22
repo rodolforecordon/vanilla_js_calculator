@@ -59,3 +59,44 @@ form button {
 form button:hover {
   background: var(--primary-color-darker);
 }
+
+#main-title {
+  font-family: 'VT323', monospace;
+  font-size: 4em;
+  text-align: center;
+  padding: 20px;
+  margin: 10px;
+}
+
+#display {
+  font-family: 'Inconsolata', monospace;
+  font-weight: 400;
+  font-size: 2.5em;
+  border: 1px solid var(--primary-color);
+  height: 2.6em;
+  margin-bottom: 5px;
+}
+
+#calc-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.btn {
+  margin: 5px;
+  padding: 30px 40px;
+  background-color: rgb(200, 200, 200);
+  border-radius: 10px;
+  text-align: center;
+  font-family: 'Inconsolata', monospace;
+  font-weight: 600;
+  font-size: 2.3em;
+}
+
+.btn:hover {
+  background-color: rgb(230, 230, 230);
+}
+
+.btn:active {
+  background-color: rgb(150, 150, 150);
+}
