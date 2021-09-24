@@ -1,9 +1,7 @@
-function CreateCalculator() {
+function Calculator() {
   const display = document.querySelector('#display');
 
-  this.start = () => {
-    clickButtons();
-  }
+  this.start = () => clickButtons();
   
   const clickButtons = () => {
     document.addEventListener('click', e => {
@@ -22,29 +20,18 @@ function CreateCalculator() {
     });
   };
 
-  const btnToDisplay = value => {
-    display.value += value;
-  };
-
-  const clearDisplay = () => {
-    display.value = '';
-  };
-
-  const deleteLast = () => {
-    display.value = display.value.slice(0, -1);
-  };
+  const btnToDisplay = value => display.value += value;
+  const clearDisplay = () => display.value = '';
+  const deleteLast = () => display.value = display.value.slice(0, -1);
 
   const equal = () => {
     let conta = display.value;
-
     try {
       conta = eval(conta);
-
       if (!conta) {
         alert('Conta inválida');
         return;
       }
-
       display.value = conta;
     } catch(e) {
       alert('Conta inválida');
@@ -52,5 +39,5 @@ function CreateCalculator() {
   };
 };
 
-const calculadora = new CreateCalculator();
+const calculadora = new Calculator();
 calculadora.start();
