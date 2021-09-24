@@ -1,49 +1,58 @@
-(function createButtons() {
-  const buttonsDiv = document.querySelector('#calc-buttons');
+function createCalculator() {
+  return {
+    display: document.querySelector('#display'),
 
-  function createEl(elName, elText, elId, ...elClass) {
-    const el = document.createElement(elName);
-    const text = document.createTextNode(elText);
-    el.appendChild(text);
-    if(elId) el.setAttribute('id', elId);
-    if(elClass) el.setAttribute('class', elClass.join(' '));
-    buttonsDiv.appendChild(el);
-  }
+    start() {
+      this.clickButtons();
+    },
+    
+    clickButtons() {
+      document.addEventListener('click', e => {
+        const el = e.target;
+        if (el.classList.contains('btn-num')) this.btnToDisplay(el.innerText);
+        if (el.classList.contains('btn-clear')) this.clearDisplay();
+        if (el.classList.contains('btn-del')) this.deleteLast();
+        if (el.classList.contains('btn-eql')) this.equal();
+      });
 
-  createEl('span', 'C', 'clear', 'btn', 'clear');
-  createEl('span', '(', '(', 'btn', '(');
-  createEl('span', ')', ')', 'btn', ')');
-  createEl('span', '/', '/', 'btn', '/');
-  createEl('span', '7', '7', 'btn', '7');
-  createEl('span', '8', '8', 'btn', '8');
-  createEl('span', '9', '9', 'btn', '9');
-  createEl('span', '*', '*', 'btn', '*');
-  createEl('span', '4', '4', 'btn', '4');
-  createEl('span', '5', '5', 'btn', '5');
-  createEl('span', '6', '6', 'btn', '6');
-  createEl('span', '+', '+', 'btn', '+');
-  createEl('span', '1', '1', 'btn', '1');
-  createEl('span', '2', '2', 'btn', '2');
-  createEl('span', '3', '3', 'btn', '3');
-  createEl('span', '-', '-', 'btn', '-');
-  createEl('span', '.', '.', 'btn', '.');
-  createEl('span', '0', '0', 'btn', '0');
-  createEl('span', '<<', '<<', 'btn', '<<');
-  createEl('span', '=', '=', 'btn', '=');
-})();
+      document.addEventListener('keydown', e => {
+        if (/([0-9])|([+-/()\*.])/.test(e.key)) this.btnToDisplay(e.key);
+        if (e.key === 'Delete') this.clearDisplay();
+        if (e.key === 'Backspace') this.deleteLast();
+        if (e.key === '=' || e.key === 'Enter') this.equal();
+      });
+    },
 
-(function main() {
-  document.addEventListener('click', (e) => {
-    const elClass = e.target.classList.value;
-    if (elClass.contains('')) ;
-  })
+    btnToDisplay(value) {
+      this.display.value += value;
+    },
 
-  function factoryFunction() {
-    return {
-      get isNumber(num) {
-        return typeof(num) === 'number';
+    clearDisplay() {
+      this.display.value = '';
+    },
+
+    deleteLast() {
+      this.display.value = this.display.value.slice(0, -1);
+    },
+
+    equal() {
+      let conta = this.display.value;
+
+      try {
+        conta = eval(conta);
+
+        if (!conta) {
+          alert('Conta inválida');
+          return;
+        }
+
+        this.display.value = conta;
+      } catch(e) {
+        alert('Conta inválida');
       }
     }
-  }
+  };
+};
 
-})();
+const calculadora = createCalculator();
+calculadora.start();

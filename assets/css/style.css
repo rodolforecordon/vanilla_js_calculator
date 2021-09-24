@@ -71,10 +71,11 @@ form button:hover {
 #display {
   font-family: 'Inconsolata', monospace;
   font-weight: 400;
-  font-size: 2.5em;
+  font-size: 4em;
   border: 1px solid var(--primary-color);
-  height: 2.6em;
+  width: 100%;
   margin-bottom: 5px;
+  text-align: right;
 }
 
 #calc-buttons {
@@ -99,4 +100,12 @@ form button:hover {
 
 .btn:active {
   background-color: rgb(150, 150, 150);
+}
+
+.btn-eql {
+  background: darkorange;
+}
+
+.btn-eql:hover {
+  background: rgb(199, 109, 0);
 }
